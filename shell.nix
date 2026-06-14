@@ -20,9 +20,11 @@ pkgs.mkShell {
       if [ -f cmdline-tools.zip ]; then
         unzip -q cmdline-tools.zip
         mkdir -p $HOME/.android-sdk/cmdline-tools/latest
-        cp -r cmdline-tools/* $HOME/.android-sdk/cmdline-tools/latest/ || true
+        cp -r cmdline-tools/* $HOME/.android-sdk/cmdline-tools/latest/ 2>/dev/null || true
         rm -rf cmdline-tools.zip cmdline-tools
       fi
+      yes | sdkmanager --licenses >/dev/null 2>&1 || true
+      sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" >/dev/null 2>&1 || true
     fi
     echo "sdk.dir=$HOME/.android-sdk" > local.properties
   '';
