@@ -1,6 +1,8 @@
-{
-  ide = "code-server";
-  env = {
-    ANDROID_HOME = "/home/.idx/android-sdk-linux";
-  };
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+    jdk17
+    android-tools
+  ];
 }
