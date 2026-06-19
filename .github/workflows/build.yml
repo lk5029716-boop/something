@@ -46,6 +46,14 @@ jobs:
             ${{ runner.os }}-ccache-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
             ${{ runner.os }}-ccache-
 
+      - name: Enable ccache for NDK
+        run: |
+          ccache --max-size=2G
+          ccache --set-config=compression=true
+          ccache --set-config=compression_level=6
+          ccache --set-config=cache_dir=/root/.ccache
+          ccache --zero-stats
+
       - name: Cache Gradle
         uses: actions/cache@v4
         with:
@@ -60,7 +68,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
-        run: CCACHE_DIR=/root/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --no-daemon
+        run: CCACHE_DIR=/root/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=2
+
+      - name: Show ccache statistics
+        run: ccache --show-stats
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
