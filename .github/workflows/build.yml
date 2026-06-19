@@ -3,6 +3,11 @@ name: Build LimoGram APK
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+      - 'README*'
+      - 'LICENSE'
   workflow_dispatch:
 
 jobs:
@@ -32,15 +37,16 @@ jobs:
       - name: Setup ccache
         run: |
           sudo apt-get update && sudo apt-get install -y ccache
+          mkdir -p /home/runner/.ccache
           ccache --max-size=2G
-          echo "CCACHE_DIR=/root/.ccache" >> $GITHUB_ENV
+          echo "CCACHE_DIR=/home/runner/.ccache" >> $GITHUB_ENV
           echo "CCACHE_COMPRESS=1" >> $GITHUB_ENV
           echo "CCACHE_COMPRESSLEVEL=6" >> $GITHUB_ENV
 
       - name: Cache ccache
         uses: actions/cache@v4
         with:
-          path: /root/.ccache
+          path: /home/runner/.ccache
           key: ${{ runner.os }}-ccache-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/CMakeLists.txt', '**/*.cmake') }}
           restore-keys: |
             ${{ runner.os }}-ccache-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
@@ -48,10 +54,11 @@ jobs:
 
       - name: Enable ccache for NDK
         run: |
+          mkdir -p /home/runner/.ccache
           ccache --max-size=2G
           ccache --set-config=compression=true
           ccache --set-config=compression_level=6
-          ccache --set-config=cache_dir=/root/.ccache
+          ccache --set-config=cache_dir=/home/runner/.ccache
           ccache --zero-stats
 
       - name: Cache Gradle
@@ -68,7 +75,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
-        run: CCACHE_DIR=/root/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=2
+        run: CCACHE_DIR=/home/runner/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=2
 
       - name: Show ccache statistics
         run: ccache --show-stats
