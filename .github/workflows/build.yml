@@ -43,10 +43,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
-        run: ./gradlew :TMessagesProj_AppStandalone:assembleAfatRelease --no-daemon
+        run: ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --no-daemon
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: LimoGram-APK
-          path: TMessagesProj_AppStandalone/build/outputs/apk/afat/release/*.apk
+          path: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/*.apk
