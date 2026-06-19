@@ -41,8 +41,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /root/.ccache
-          key: ${{ runner.os }}-ccache-${{ github.sha }}
+          key: ${{ runner.os }}-ccache-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties', '/CMakeLists.txt', '/*.cmake') }}
           restore-keys: |
+            ${{ runner.os }}-ccache-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties') }}
             ${{ runner.os }}-ccache-
 
       - name: Cache Gradle
@@ -60,6 +61,18 @@ jobs:
 
       - name: Build APK
         run: CCACHE_DIR=/root/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --no-daemon
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+
+      - name: Upload to Firebase App Distribution
+        uses: firebase-extensions/release-firebase-app-distribution@latest
+        with:
+          appId: 1:limogram-dc92f
+          file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/*.apk
+          releaseNotes: "Auto build from commit ${{ github.sha }}"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
