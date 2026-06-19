@@ -41,9 +41,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /root/.ccache
-          key: ${{ runner.os }}-ccache-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties', '/CMakeLists.txt', '/*.cmake') }}
+          key: ${{ runner.os }}-ccache-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', '**/CMakeLists.txt', '**/*.cmake') }}
           restore-keys: |
-            ${{ runner.os }}-ccache-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties') }}
+            ${{ runner.os }}-ccache-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
             ${{ runner.os }}-ccache-
 
       - name: Cache Gradle
@@ -62,20 +62,22 @@ jobs:
       - name: Build APK
         run: CCACHE_DIR=/root/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --no-daemon
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-
-      - name: Upload to Firebase App Distribution
-        uses: firebase-extensions/release-firebase-app-distribution@latest
-        with:
-          appId: 1:limogram-dc92f
-          file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/*.apk
-          releaseNotes: "Auto build from commit ${{ github.sha }}"
-
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: LimoGram-APK
           path: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/*.apk
+
+      - name: Upload to Firebase App Distribution
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT secret not set — skipping"
+            exit 0
+          fi
+          echo "$FIREBASE_SERVICE_ACCOUNT" > /tmp/firebase-key.json
+          npm install -g firebase-tools
+          APK=$(find . -name "*.apk" -path "*/build/outputs/*" | head -1)
+          echo "Uploading $APK to Firebase App Distribution..."
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-key.json firebase appdistribution:distribute "$APK" --app 1:1047579120588:android:limogram-dc92f
