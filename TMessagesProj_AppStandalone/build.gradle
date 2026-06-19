@@ -142,7 +142,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    namespace 'org.telegram.messenger.web'
+    namespace 'com.limogram.messenger.web'
 
     lintOptions {
         checkReleaseBuilds false
