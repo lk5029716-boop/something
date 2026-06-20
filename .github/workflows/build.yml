@@ -99,4 +99,4 @@ jobs:
           npm install -g firebase-tools
           APK=$(find . -name "*.apk" -path "*/build/outputs/*" | head -1)
           echo "Uploading $APK to Firebase App Distribution..."
-          GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-key.json firebase appdistribution:distribute "$APK" --app 1:1047579120588:android:limogram-dc92f
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-key.json firebase appdistribution:distribute "$APK" --app 1:760348033671:android:f6afd7b67eae3860
