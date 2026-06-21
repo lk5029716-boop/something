@@ -31,8 +31,19 @@ jobs:
         run: |
           sdkmanager --install \
             "platforms;android-35" \
-            "build-tools;35.0.0" \
-            "ndk;27.2.12479018"
+            "build-tools;35.0.0"
+
+      - name: Cache NDK
+        uses: actions/cache@v4
+        with:
+          path: $ANDROID_HOME/ndk/27.2.12479018
+          key: ${{ runner.os }}-ndk-27.2.12479018
+
+      - name: Install NDK (if not cached)
+        run: |
+          if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then
+            sdkmanager --install "ndk;27.2.12479018"
+          fi
 
       - name: Setup ccache
         run: |
@@ -58,7 +69,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
@@ -66,7 +77,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
-        run: CCACHE_DIR=/home/runner/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4
+        run: CCACHE_DIR=/home/runner/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4 --build-cache --configure-on-demand
 
       - name: Show ccache statistics
         run: ccache --show-stats
@@ -84,3 +95,4 @@ jobs:
           appId: 1:1024137757069:android:3459ad6c648c53543c7dc4
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/app.apk
+          groups: testers
