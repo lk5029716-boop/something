@@ -62,6 +62,7 @@ jobs:
           key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
           restore-keys: |
             ${{ runner.os }}-ccache-
+          save-always: true
 
       - name: Cache Gradle
         uses: actions/cache@v4
@@ -72,6 +73,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+          save-always: true
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
