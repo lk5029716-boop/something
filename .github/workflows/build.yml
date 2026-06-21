@@ -95,4 +95,3 @@ jobs:
           appId: 1:1024137757069:android:3459ad6c648c53543c7dc4
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/app.apk
-          groups: testers
