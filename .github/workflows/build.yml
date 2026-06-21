@@ -18,7 +18,10 @@ env:
   CCACHE_DIR: /home/runner/.ccache
   CCACHE_COMPRESS: 1
   CCACHE_COMPRESSLEVEL: 6
+  CCACHE_SLOPPINESS: include_file_mtime,include_file_ctime,time_macros,file_macro,system_headers
+  CCACHE_BASEDIR: $GITHUB_WORKSPACE
   NDK_CCACHE: ccache
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.workers.max=8 -Dorg.gradle.configureondemand=true
 
 jobs:
   build:
