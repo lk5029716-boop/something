@@ -4718,6 +4718,36 @@ public class Theme {
         themes.add(themeInfo);
         themesDict.put("Night", themeInfo);
 
+        // ============================================================
+        // LimoGram — Built-in default theme (matches LimoGram brand)
+        // Yellow outgoing bubbles, dark green outlines, gray incoming
+        // ============================================================
+        themeInfo = new ThemeInfo();
+        themeInfo.name = "LimoGram";
+        themeInfo.assetName = "limogram_dark.attheme";
+        themeInfo.previewBackgroundColor = 0xff181818;
+        themeInfo.previewInColor = 0xffF1EFFD;
+        themeInfo.previewOutColor = 0xffEFB52F;
+        themeInfo.firstAccentIsDefault = true;
+        themeInfo.currentAccentId = DEFALT_THEME_ACCENT_ID;
+        themeInfo.sortIndex = 0;
+        themeInfo.setAccentColorOptions(
+                new int[]    { 0xFFEFB52F,                     0xFF0F7649,                    0xFF6B8FD4,                    0xFFD17A22,                    0xFFB54891,                    0xFF7B88AB,                    0xFFD28036,                    0xFF43ACC7,                    0xFF52AC44,                    0xFFCD5F93,                    0xFF8854B4,                    0xFFCE4E57,                    0xFFD3AE40,                    0xFF328ACF,                    0xFF2491AD,                    0xFF299C2F },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    { 0x00000000,                     0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000,                    0x00000000 },
+                new int[]    {         0,                              0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0 },
+                new String[] {         "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "",                                "" },
+                new int[]    {          0,                              0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0 },
+                new int[]    {          0,                              0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0,                             0 }
+                );
+        sortAccents(themeInfo);
+        themes.add(currentDayTheme = defaultTheme = themeInfo);
+        themesDict.put("LimoGram", themeInfo);
+
         String themesString = themeConfig.getString("themes2", null);
 
         int remoteVersion = themeConfig.getInt("remote_version", 0);

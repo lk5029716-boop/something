@@ -14,6 +14,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  CCACHE_DIR: /home/runner/.ccache
+  CCACHE_COMPRESS: 1
+  CCACHE_COMPRESSLEVEL: 6
+  NDK_CCACHE: ccache
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,76 +37,54 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install required SDK components
+      - name: Install SDK components
         run: |
-          sdkmanager --install \
-            "platforms;android-35" \
-            "build-tools;35.0.0"
+          sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
 
       - name: Cache NDK
-        uses: actions/cache@v4
+        uses: actions/cache@v3
         with:
           path: $ANDROID_HOME/ndk/27.2.12479018
           key: ${{ runner.os }}-ndk-27.2.12479018
 
-      - name: Install NDK (if not cached)
+      - name: Install NDK if missing
         run: |
           if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then
             sdkmanager --install "ndk;27.2.12479018"
           fi
 
-      - name: Restore ccache
-        uses: actions/cache/restore@v4
+      - name: Cache ccache
+        uses: actions/cache@v3
         with:
           path: /home/runner/.ccache
-          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          key: Linux-ccache
           restore-keys: |
-            ${{ runner.os }}-ccache-
-          fail-on-cache-miss: false
+            Linux-ccache
 
-      - name: Restore Gradle cache
-        uses: actions/cache/restore@v4
+      - name: Cache Gradle
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
+          key: ${{ runner.os }}-gradle
           restore-keys: |
-            ${{ runner.os }}-gradle-
-          fail-on-cache-miss: false
+            ${{ runner.os }}-gradle
 
       - name: Setup ccache
         run: |
           sudo apt-get update && sudo apt-get install -y ccache
           mkdir -p /home/runner/.ccache
           ccache --max-size=5G
-          echo "CCACHE_DIR=/home/runner/.ccache" >> $GITHUB_ENV
-          echo "CCACHE_COMPRESS=1" >> $GITHUB_ENV
-          echo "CCACHE_COMPRESSLEVEL=6" >> $GITHUB_ENV
-          echo "NDK_CCACHE=ccache" >> $GITHUB_ENV
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build APK
-        run: ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4 --build-cache --configure-on-demand
+        run: ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4
 
       - name: Show ccache statistics
         run: ccache --show-stats
-
-      - name: Save ccache
-        uses: actions/cache/save@v4
-        with:
-          path: /home/runner/.ccache
-          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-
-      - name: Save Gradle cache
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
@@ -114,4 +98,4 @@ jobs:
         with:
           appId: 1:1024137757069:android:3459ad6c648c53543c7dc4
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/app.apk
+          file: TMessagesProj_AppStandalone/build/outputs/apk/afat/standalone/*.apk

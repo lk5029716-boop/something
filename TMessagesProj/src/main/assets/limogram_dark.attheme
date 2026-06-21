@@ -1,0 +1,310 @@
+# LimoGram Theme - Based on screenshot: yellow outgoing bubbles with green outlines,
+# gray incoming bubbles, green accent dots, yellow bottom nav.
+# Users can still switch to any other theme in Settings.
+
+# ============================================================
+# BASE: Dark backgrounds
+# ============================================================
+windowBackgroundWhite=-14145496
+windowBackgroundGray=-16777216
+windowBackgroundUnchecked=-14145496
+windowBackgroundChecked=-13666645
+windowBackgroundCheckText=-1
+progressCircle=-14145496
+listSelector=1515107571
+settings_listSelector=1515107571
+windowBackgroundWhiteInputField=-13816531
+windowBackgroundWhiteInputFieldActivated=-13816531
+windowBackgroundWhiteGrayIcon=-7566196
+windowBackgroundWhiteBlueText=-10349687
+windowBackgroundWhiteBlueText2=-10349687
+windowBackgroundWhiteBlueText3=-10349687
+windowBackgroundWhiteBlueText4=-10349687
+windowBackgroundWhiteBlueText5=-10349687
+windowBackgroundWhiteBlueText6=-10349687
+windowBackgroundWhiteBlueText7=-10349687
+windowBackgroundWhiteBlueButton=-10349687
+windowBackgroundWhiteBlueIcon=-10349687
+windowBackgroundWhiteGreenText=-10349687
+windowBackgroundWhiteGreenText2=-10349687
+windowBackgroundWhiteGrayText=-7566196
+windowBackgroundWhiteGrayText2=-7566196
+windowBackgroundWhiteGrayText3=-7566196
+windowBackgroundWhiteGrayText4=-7566196
+windowBackgroundWhiteGrayText5=-7566196
+windowBackgroundWhiteGrayText6=-7566196
+windowBackgroundWhiteGrayText7=-7566196
+windowBackgroundWhiteGrayText8=-7566196
+windowBackgroundWhiteBlackText=-1
+windowBackgroundWhiteHintText=-7566196
+windowBackgroundWhiteValueText=-1
+windowBackgroundWhiteLinkText=-10349687
+windowBackgroundWhiteLinkSelection=-10349687
+windowBackgroundWhiteBlueHeader=-1
+
+# ============================================================
+# ACTION BAR: Black with white title, yellow accent
+# ============================================================
+actionBarDefault=-16777216
+actionBarDefaultSelector=1515107571
+actionBarDefaultIcon=-1
+actionBarActionModeDefault=-14211289
+actionBarActionModeDefaultTop=-14277082
+actionBarActionModeDefaultIcon=-1
+actionBarActionModeDefaultSelector=1515107571
+actionBarDefaultTitle=-1
+actionBarDefaultSubtitle=-7566196
+actionBarDefaultSearch=-1
+actionBarDefaultSearchPlaceholder=-7566196
+actionBarDefaultSubmenuItem=-1
+actionBarDefaultSubmenuItemIcon=-1
+actionBarDefaultSubmenuBackground=-14145495
+actionBarDefaultSubmenuSeparator=-12040120
+actionBarTabActiveText=-3267521
+actionBarTabUnactiveText=-7434609
+actionBarTabLine=-3267521
+actionBarTabSelector=-1
+actionBarDefaultArchived=-14474458
+actionBarDefaultArchivedSelector=1515107571
+actionBarDefaultArchivedIcon=-1
+actionBarDefaultArchivedTitle=-1
+actionBarDefaultArchivedSearch=-1
+actionBarDefaultArchivedSearchPlaceholder=-7566196
+
+# ============================================================
+# CHAT BUBBLES:
+#   - Outgoing (right): YELLOW fill, GREEN outline
+#   - Incoming (left):  GRAY fill
+#   - Green status dot: dark green
+# ============================================================
+chat_inBubble=-14474460
+chat_inBubbleSelected=-12566488
+chat_outBubble=-3267521
+chat_outBubbleSelected=-2474701
+chat_inBubbleShadow=-15066598
+chat_outBubbleShadow=-3267521
+chat_inBubbleMedia=-14474460
+chat_outBubbleMedia=-3267521
+chat_outBubbleGradient=-3267521
+
+# ============================================================
+# CHAT TEXT: White on dark bubbles, black on yellow
+# ============================================================
+chat_messageTextIn=-1
+chat_messageTextOut=-14723069
+chat_messageTextInSelected=-1
+chat_messageTextOutSelected=-14723069
+chat_messageTextInThumb=-1
+chat_messageTextOutThumb=-14723069
+chat_messageTextInForwarded=-7566196
+chat_messageTextOutForwarded=-16777216
+chat_messageLinkIn=-1
+chat_messageLinkOut=-14723069
+chat_messageLinkInPressed=-1
+chat_messageLinkOutPressed=-14723069
+
+# ============================================================
+# CHAT UI ELEMENTS: Green accents
+# ============================================================
+chat_inTime=-7566196
+chat_outTime=-14723069
+chat_inTimeSelected=-1
+chat_outTimeSelected=-14723069
+chat_inCheck=-7566196
+chat_outCheck=-14723069
+chat_inCheckSelected=-1
+chat_outCheckSelected=-14723069
+chat_inClock=-7566196
+chat_outClock=-14723069
+chat_inViews=-7566196
+chat_outViews=-14723069
+chat_inReplies=-7566196
+chat_outReplies=-14723069
+chat_inRepliesBackground=-13816531
+chat_outRepliesBackground=-13816531
+chat_inReplyName=-1
+chat_outReplyName=-14723069
+chat_inReplyMessage=-7566196
+chat_outReplyMessage=-7566196
+chat_inReplyMedia=-7566196
+chat_outReplyMedia=-7566196
+chat_inReplyLine=-10349687
+chat_outReplyLine=-14723069
+chat_inPsa=-7566196
+chat_outPsa=-14723069
+chat_inAdmin=-7566196
+chat_outAdmin=-14723069
+chat_inViaBot=-7566196
+chat_outViaBot=-14723069
+chat_inAudioTitle=-1
+chat_outAudioTitle=-14723069
+chat_inAudioPerformer=-7566196
+chat_outAudioPerformer=-7566196
+chat_inAudioProgress=-10349687
+chat_outAudioProgress=-14723069
+chat_inFile=-1
+chat_outFile=-14723069
+chat_inContactName=-1
+chat_outContactName=-14723069
+chat_inContactPhone=-7566196
+chat_outContactPhone=-7566196
+chat_inLocationPlaceholder=-1
+chat_outLocationPlaceholder=-14723069
+chat_inLocationInfo=-7566196
+chat_outLocationInfo=-7566196
+chat_inSiteName=-1
+chat_outSiteName=-14723069
+chat_inVenueInfo=-1
+chat_outVenueInfo=-14723069
+chat_inInstant=-1
+chat_outInstant=-14723069
+chat_inInstantSelected=-1
+chat_outInstantSelected=-14723069
+
+# ============================================================
+# CHAT SERVICE MESSAGES: dim gray
+# ============================================================
+chat_serviceText=-1314579
+chat_serviceBackground=0
+chat_serviceBackgroundSelected=0
+chat_serviceIcon=-1314579
+chat_serviceLink=-1314579
+
+# ============================================================
+# PROFILE / ACTION BAR ITEMS
+# ============================================================
+avatar_actionBarIcon=-1
+avatar_actionBarSelector=-14723069
+avatar_subtitle=-7566196
+avatar_backgroundActionBarBlue=-14145496
+avatar_backgroundActionBarCyan=-14145496
+avatar_backgroundActionBarGreen=-14145496
+avatar_backgroundActionBarOrange=-14145496
+avatar_backgroundActionBarPink=-14145496
+avatar_backgroundActionBarRed=-14145496
+avatar_backgroundActionBarViolet=-14145496
+avatar_backgroundActionBarYellow=-14145496
+
+# ============================================================
+# NAVIGATION BAR: Yellow (matches bottom nav in screenshot)
+# ============================================================
+player_actionBar=-3267521
+player_actionBarSelector=1515107571
+player_actionBarTitle=-14723069
+player_actionBarTop=-3267521
+player_actionBarSubtitle=-14723069
+player_actionBarItems=-14723069
+
+# ============================================================
+# ACCENT COLOR: Gold/Yellow (#EFB52F) - matches the yellow bubbles & FAB
+# ============================================================
+accent=-3267521
+
+# ============================================================
+# DIALOGS / SHEETS / SNACKBAR
+# ============================================================
+dialogBackground=-14145496
+dialogBackgroundGray=-14145496
+dialogTextBlack=-1
+dialogTextLink=-10349687
+dialogTextBlue=-10349687
+dialogTextBlue2=-10349687
+dialogTextBlue3=-10349687
+dialogTextBlue4=-10349687
+dialogTextGray=-7566196
+dialogTextGray2=-7566196
+dialogTextGray3=-7566196
+dialogTextGray4=-7566196
+dialogTextHint=-7566196
+dialogCheckboxSquare=-16777216
+dialogCheckboxSquareCheck=-3267521
+dialogCheckboxSquareDisabled=-7566196
+dialogCheckboxSquareUnchecked=-16777216
+dialogCheckboxSquareBackground=-14145496
+dialogScrollGlow=-3267521
+dialogRoundCheckBox=-3267521
+dialogRoundCheckBoxCheck=-1
+dialogCameraIcon=-1
+dialogBadgeBackground=-10349687
+dialogBadgeText=-1
+dialogLineProgress=80
+dialogLineProgressBackground=40
+dialogButton=-3267521
+dialogButtonSelector=1515107571
+dialogButtonText=-1
+dialogButtonTextSelector=-1
+dialogIcon=-3267521
+dialogGreen=-10349687
+dialogRed=-769226
+dialogFloatingButton=-3267521
+dialogFloatingButtonPressed=-2474701
+dialogFloatingButtonIcon=-1
+dialogFloatingButtonBackground=-14145496
+
+# ============================================================
+# ICONS
+# ============================================================
+iconColor=-1
+iconColorSelected=-14723069
+
+# ============================================================
+# DIVIDERS / BORDERS
+# ============================================================
+divider=-12040120
+graySection=-12040120
+graySectionText=-7566196
+key_chat_wallpaper=-16777216
+
+# ============================================================
+# GREEN ACCENT DOTS / BADGES (from screenshot)
+# ============================================================
+chat_status=-10349687
+
+# ============================================================
+# BOTTOM NAV (yellow with black icons/text when active)
+# ============================================================
+# Bottom nav uses windowBackgroundWhite (-14145496) by default
+# ActionBar uses accent (-3267521 = yellow) when active
+
+# ============================================================
+# FAB (yellow circle with smiley icon)
+# ============================================================
+fabBackground=-3267521
+fabBackgroundPressed=-2474701
+fabIcon=-14723069
+
+# ============================================================
+# TEXT
+# ============================================================
+text_selected=-14723069
+textSelection=-3267521
+textHighlight=-3267521
+
+# ============================================================
+# SEARCH PANEL
+# ============================================================
+searched=-3267521
+searchedSubtitle=-1
+
+# ============================================================
+# PROGRESS / LOADING
+# ============================================================
+progress=-3267521
+
+# ============================================================
+# LOGIN / INTRO SCREENS: dark with yellow accent
+# ============================================================
+login_icon=-1
+login_iconActive=-3267521
+login_iconPlaceholder=-7566196
+login_phoneText=-1
+login_countriesText=-1
+login_countryText=-1
+
+# ============================================================
+# COMMON BUTTONS
+# ============================================================
+primary=-3267521
+primary_text=-14723069
+secondary=-14723069
+secondary_text=-1
