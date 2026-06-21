@@ -10,6 +10,10 @@ on:
       - 'LICENSE'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,6 +49,26 @@ jobs:
             sdkmanager --install "ndk;27.2.12479018"
           fi
 
+      - name: Restore ccache
+        uses: actions/cache/restore@v4
+        with:
+          path: /home/runner/.ccache
+          key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            ${{ runner.os }}-ccache-
+          fail-on-cache-miss: false
+
+      - name: Restore Gradle cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+          fail-on-cache-miss: false
+
       - name: Setup ccache
         run: |
           sudo apt-get update && sudo apt-get install -y ccache
@@ -55,34 +79,28 @@ jobs:
           echo "CCACHE_COMPRESSLEVEL=6" >> $GITHUB_ENV
           echo "NDK_CCACHE=ccache" >> $GITHUB_ENV
 
-      - name: Cache ccache
-        uses: actions/cache@v4
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build APK
+        run: ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4 --build-cache --configure-on-demand
+
+      - name: Show ccache statistics
+        run: ccache --show-stats
+
+      - name: Save ccache
+        uses: actions/cache/save@v4
         with:
           path: /home/runner/.ccache
           key: ${{ runner.os }}-ccache-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
-          restore-keys: |
-            ${{ runner.os }}-ccache-
-          save-always: true
 
-      - name: Cache Gradle
-        uses: actions/cache@v4
+      - name: Save Gradle cache
+        uses: actions/cache/save@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'TMessagesProj_AppStandalone/build.gradle', 'TMessagesProj/build.gradle') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-          save-always: true
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build APK
-        run: CCACHE_DIR=/home/runner/.ccache ./gradlew :TMessagesProj_AppStandalone:assembleAfatStandalone --parallel --max-workers=4 --build-cache --configure-on-demand
-
-      - name: Show ccache statistics
-        run: ccache --show-stats
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
