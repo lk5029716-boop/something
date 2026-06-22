@@ -31,6 +31,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Free disk space
+        run: |
+          echo "Disk before cleanup:"
+          df -h /
+          sudo rm -rf \
+            /usr/share/dotnet \
+            /opt/ghc \
+            /usr/local/.ghcup \
+            /usr/local/share/boost \
+            /opt/hostedtoolcache/CodeQL \
+            /usr/local/lib/android/sdk/ndk
+          docker system prune -af || true
+          echo "Disk after cleanup:"
+          df -h /
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -78,7 +93,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y ccache
           mkdir -p /home/runner/.ccache
-          ccache --max-size=5G
+          ccache --max-size=2G
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
