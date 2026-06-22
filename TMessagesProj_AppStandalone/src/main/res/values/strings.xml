@@ -77,4 +77,24 @@
 
     <string name="SmsNotificationTitle">Telegram Premium for SMS</string>
     <string name="SmsNotificationSubtitle">%1$d of %2$d SMS Sent</string>
+
+    <string name="UnknownError">Unknown error</string>
+    <string name="None">None</string>
+    <string name="Close">Close</string>
+    <string name="OK">OK</string>
+
+    <string name="Back">Back</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Next">Next</string>
+    <string name="Settings">Settings</string>
+    <string name="VoipGroupLeave">Leave</string>
+
+    <string name="AppUpdate">Update Available</string>
+    <string name="AppUpdateBeta">Update Available</string>
+    <string name="AppUpdateNow">Update Now</string>
+    <string name="AppUpdateDownloadNow">Download Now</string>
+    <string name="AppUpdateRemindMeLater">Remind Me Later</string>
+    <string name="AppUpdateDownloading">Downloading %1$d%%</string>
+    <string name="AppUpdateVersionAndSize">Version %1$s • %2$s</string>
+    <string name="AppUpdateChangelogEmpty">What\'s new</string>
 </resources>
