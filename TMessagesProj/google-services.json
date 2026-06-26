@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1024137757069:android:3459ad6c648c53543c7dc4",
         "android_client_info": {
-          "package_name": "com.limogram.messenger"
+          "package_name": "org.telegram.messenger"
         }
       },
       "oauth_client": [],
