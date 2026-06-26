@@ -43,7 +43,10 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file("../TMessagesProj/config/debug.keystore")
+            storeFile file("../TMessagesProj/config/release.keystore")
+            storePassword "android"
+            keyAlias "AndroidDebugKey"
+            keyPassword "android"
         }
 
 
