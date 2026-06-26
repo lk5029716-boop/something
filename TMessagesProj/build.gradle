@@ -113,7 +113,6 @@ android {
 
 
     defaultConfig {
-        applicationId "com.limogram.messenger"
         minSdkVersion 21
         targetSdkVersion 35
 
