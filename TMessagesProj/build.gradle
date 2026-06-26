@@ -225,7 +225,7 @@ android {
         }
     }
 
-    namespace 'org.telegram.messenger'
+    namespace 'com.limogram.messenger'
 }
 
 
