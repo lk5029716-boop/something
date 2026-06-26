@@ -86,7 +86,9 @@ android {
     compileSdkVersion 35
     buildToolsVersion '35.0.0'
     ndkVersion "27.2.12479018"
-    buildConfig true
+    buildFeatures {
+        buildConfig true
+    }
 
     sourceSets.main.jniLibs.srcDirs = ['./jni/']
 
