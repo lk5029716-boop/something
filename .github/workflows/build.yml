@@ -1,0 +1,22 @@
+name: Build LimoGram
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout: 600
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build Debug
+        run: cd TMessagesProj && chmod +x gradlew && ./gradlew assembleDebug --no-daemon -x lint 2>&1 | tail -50
